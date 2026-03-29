@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+
+    body{
+        background:
+        linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.70)),
+        url('/static/bg3.png');
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+    }
+
+    .page-center{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height: calc(100vh - 120px);
+    }
+
+    .quiz-container{
+        display: flex;
+        justify-content: center;
+        height: 100%;
+    }
+
+
+    .quiz-box{
+        background: #ffffff;
+        width: 700px;
+        max-height:calc(100vh - 140px);
+        padding: 25px 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
+        /* MAIN FIX */
+        height: 100%;
+        overflow-y: auto;  
+    }
+    .quiz-box::-webkit-scrollbar-thumb{
+        background: #1f3bb3;
+        border-bottom: 10px;
+    }
+
+    /* Title */
+    .quiz-box h2{
+        text-align: center;
+        color: #1f3bb3;
+        margin-bottom: 20px;
+    }
+
+    /* Each question block */
+    .question{
+        background: #f4f6ff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .question p{
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    /* Submit button */
+    .quiz-box button{
+        width: 100%;
+        padding: 12px;
+        background: #1f3bb3;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .quiz-box button:hover{
+        background: #162c91;
+    }
+
+    .question label {
+        display: block;
+        margin: 5px 0;
+        cursor: pointer;
+    }
+
+    #timer {
+        color: rgb(65, 169, 30);
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+
+<div class="quiz-container">
+    <form method="POST" action="/submit_quiz" class="quiz-box">
+
+    <h2>Cyber Safety Awareness Quiz</h2>
+
+    <h3 id="timer">Time Left: 5m 0s</h3>
+
+    <div class="question">
+        <p>1. What is phishing?</p>
+        <label><input type="radio" name="q1" value="hardware"> Hardware Problem</label>
+        <label><input type="radio" name="q1" value="phishing" required> Fake email to steal data</label>
+        <label><input type="radio" name="q1" value="virus"> Virus</label>
+        <label><input type="radio" name="q1" value="slow"> Slow internet</label>
+    </div>
+
+<div class="question">
+<p>2. Which password is strongest?</p>
+<label><input type="radio" name="q2" value="strong" required> A@9k#21P</label>
+<label><input type="radio" name="q2" value="weak"> Safety123</label>
+<label><input type="radio" name="q2" value="weak"> 123456</label>
+<label><input type="radio" name="q2" value="weak"> password</label>
+</div>
+
+<div class="question">
+<p>3. Should you share OTP?</p>
+<label><input type="radio" name="q3" value="no" required> No</label>
+<label><input type="radio" name="q3" value="yes"> Yes</label>
+<label><input type="radio" name="q3" value="yes"> None</label>
+</div>
+
+<div class="question">
+<p>4. What should you do if you receive unknown links?</p>
+<label><input type="radio" name="q4" value="open"> Download Files</label>
+<label><input type="radio" name="q4" value="open"> Share with others</label>
+<label><input type="radio" name="q4" value="ignore" required> Ignore</label>
+<label><input type="radio" name="q4" value="open"> Open</label>
+</div>
+
+<div class="question">
+<p>5. Which is safe practice?</p>
+<label><input type="radio" name="q5" value="skip"> Use same password everywhere</label>
+<label><input type="radio" name="q5" value="update" required> Update software</label>
+<label><input type="radio" name="q5" value="skip"> Skip updates</label>
+<label><input type="radio" name="q5" value="skip"> Disable antivirus</label>
+</div>
+
+<div class="question">
+<p>6. Antivirus helps to?</p>
+<label><input type="radio" name="q6" value="protect" required> Protect system</label>
+<label><input type="radio" name="q6" value="slow"> Delete files randomly</label>
+<label><input type="radio" name="q6" value="slow"> Increase internet speed</label>
+<label><input type="radio" name="q6" value="slow"> Slow PC</label>
+</div>
+
+<div class="question">
+<p>7. Strong password contains?</p>
+<label><input type="radio" name="q7" value="name"> only numbers</label>
+<label><input type="radio" name="q7" value="name"> only letters</label>
+<label><input type="radio" name="q7" value="mix" required> Letters, numbers & symbols</label>
+<label><input type="radio" name="q7" value="name"> Your name</label>
+</div>
+
+<div class="question">
+<p>8. Public WiFi is?</p>
+<label><input type="radio" name="q8" value="safe"> Faster than mobile data</label>
+<label><input type="radio" name="q8" value="unsafe" required> Risky</label>
+<label><input type="radio" name="q8" value="safe"> Free and secure</label>
+<label><input type="radio" name="q8" value="safe"> Always safe</label>
+</div>
+
+<div class="question">
+<p>9. Two-factor authentication is?</p>
+<label><input type="radio" name="q9" value="waste"> Only for blanks</label>
+<label><input type="radio" name="q9" value="waste"> Not useful</label>
+<label><input type="radio" name="q9" value="waste"> Waste of time</label>
+<label><input type="radio" name="q9" value="secure" required> Extra security</label>
+</div>
+
+<div class="question">
+<p>10. Cyber crime includes?</p>
+<label><input type="radio" name="q10" value="game"> Sending Emails</label>
+<label><input type="radio" name="q10" value="game"> Watching videos</label>
+<label><input type="radio" name="q10" value="fraud" required> Online fraud</label>
+<label><input type="radio" name="q10" value="game"> Playing games</label>
+</div>
+
+<button type="submit">Submit Quiz</button>
+
+</form>
+</div>
+
+<script>
+let timeLeft = 300; // 5 minutes = 300 seconds
+
+let timer = setInterval(function() {
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    document.getElementById("timer").innerText =
+        "Time Left: " + minutes + "m " + seconds + "s";
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+        clearInterval(timer);
+        alert("Time is up!");
+        document.querySelector("form").submit();
+    }
+
+}, 1000);
+</script>
+
+{% endblock %}

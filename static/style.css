@@ -1,0 +1,47 @@
+/* Container styling already exists, adding form input/button style */
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+.container input:focus {
+  outline: none;
+  border-color: #2575fc;
+  box-shadow: 0 2px 6px rgba(37,117,252,0.3);
+}
+
+.container button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.container button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* Page headings */
+.container h2 {
+  text-align: center;
+  color: #004d40;
+  margin-bottom: 25px;
+}
+
+
+

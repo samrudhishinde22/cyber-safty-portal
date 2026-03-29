@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if not error %}
+<div id="popup">Welcome to SecureIQ 🎉</div>
+{% endif %}
+
+{% if error %}
+<div id="errorPopup" style="
+    position: fixed;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4d94ff;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-weight: bold;
+    z-index: 1000;
+">
+    ❌ {{ error }}
+</div>
+
+<script>
+    setTimeout(() => {
+        document.getElementById("errorPopup").style.display = "none";
+    }, 3000);
+</script>
+{% endif %}
+
+<style>
+
+/* BACKGROUND IMAGE ADDED */
+body{
+    background:
+    linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.70)),
+    url('/static/bg3.png');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+.page-center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height: calc(100vh - 120px);
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.box a {
+    display: block;
+    margin: 15px 0;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.box a:hover {
+    background: #0056b3;
+}
+
+</style>
+
+<div class="page-center">
+    <div class="box">
+        <h2>Welcome to Cyber Safety Portal</h2>
+        <div class="dashboard-actions"></div>
+        <a href="{{ url_for('phishing_check') }}">Phishing Link Checker</a>
+        <a href="{{ url_for('quiz') }}" class="dash-btn">Take Cyber Safety Quiz</a>
+        <a href="{{ url_for('certificate') }}" class="dash-btn">Download Certificate</a>
+    </div>
+</div>
+
+{% endblock %}

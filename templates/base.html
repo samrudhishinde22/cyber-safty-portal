@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecureIQ</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#f4f6f9;
+        }
+
+        /* HEADER */
+
+        .header{
+            background:#1f3bb3;
+            color:white;
+            padding:15px;
+            font-size:22px;
+            position:fixed;
+            top:0;
+            width:100%;
+            z-index:100;
+
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .back-arrow{
+            font-size:26px;
+            font-weight:800;
+            cursor:pointer;
+        }
+
+        .back-arrow:hover{
+            opacity:0.8;
+        }
+
+
+        /* MAIN LAYOUT */
+
+        .container{
+            display:flex;
+            margin-top:60px;
+        }
+
+
+        /* SIDEBAR FIXED */
+
+        .sidebar{
+            width:220px;
+            background:transparent;
+            padding:15px;
+
+            position:fixed;
+            top:60px;
+            left:0;
+
+            height:calc(100vh - 60px);
+
+            overflow-y:auto;
+        }
+
+
+        /* SIDEBAR LINKS */
+
+        .sidebar a{
+            display:block;
+            padding:10px;
+            margin-bottom:10px;
+            background:rgba(255,255,255,0.75);
+            color:#1f3bb3;
+            text-decoration:none;
+            border-radius:6px;
+            text-align:center;
+        }
+
+        .sidebar a:hover{
+            background:#d6dcff;
+            color:white;
+        }
+
+
+        /* ACTIVE MENU */
+
+        .sidebar a.active{
+            background:#1f3bb3;
+            color:white;
+            font-weight:bold;
+        }
+
+
+        /* CONTENT AREA */
+
+        .content{
+            flex:1;
+            padding:30px;
+            margin-left:240px;     /* space for fixed sidebar */
+            display:flex;
+            justify-content:center;
+        }
+
+
+
+        /* POPUP */
+
+        #popup{
+            position:fixed;
+            top:20px;
+            right:20px;
+            background:#28a745;
+            color:white;
+            padding:15px 25px;
+            border-radius:8px;
+            display:none;
+            z-index:1000;
+        }
+
+
+
+        /* RESULT PAGE */
+
+        .result-container{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            margin-top:40px;
+        }
+
+        .score-text{
+            font-size:22px;
+            font-weight:600;
+            text-align:center;
+        }
+
+        .pass-text{
+            color:green;
+            margin-left:6px;
+        }
+
+
+        /* CERTIFICATE BUTTON */
+
+        .certificate-container{
+            margin-top:18px;
+        }
+
+        .certificate-btn{
+            display:inline-block;
+            padding:12px 26px;
+            background:#1f3bb3;
+            color:white;
+            text-decoration:none;
+            border-radius:30px;
+            font-size:15px;
+            font-weight:600;
+            box-shadow:0 6px 14px rgba(0,0,0,0.15);
+            transition:0.3s ease;
+        }
+
+        .certificate-btn:hover{
+            background:#162c91;
+            transform:translateY(-2px);
+        }
+
+
+
+        /* PHISHING PAGE */
+
+        .phishing-form form{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        .phishing-form input[type="text"]{
+            display:block;
+            margin-top:15px;
+        }
+
+        .phishing-form button{
+            display:block;
+            margin-top:10px;
+        }
+
+
+
+        /* PHISHING PAGE LAYOUT */
+
+        .phishing-page{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            width:100%;
+        }
+
+        .phishing-page h2{
+            font-size:28px;
+            font-weight:700;
+            margin-bottom:25px;
+        }
+
+
+        /* INPUT STYLE */
+
+        .phishing-page input[type="text"]{
+            width:320px;
+            padding:12px 14px;
+            font-size:15px;
+            border-radius:10px;
+            border:1px solid #ccc;
+            outline:none;
+            box-shadow:0 2px 6px rgba(0,0,0,0.12);
+        }
+
+        .phishing-page input[type="text"]:focus{
+            border-color:#2575fc;
+            box-shadow:0 2px 8px rgba(37,117,252,0.35);
+        }
+
+
+        /* BUTTON STYLE */
+
+        .phishing-page button{
+            margin-top:15px;
+            padding:12px;
+            width:180px;
+            border:none;
+            border-radius:10px;
+            background:linear-gradient(90deg,#3911cb,#2575fc);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .phishing-page button:hover{
+            opacity:0.9;
+            transform:translateY(-2px);
+        }
+
+        .phishing-page form{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        
+
+    </style>
+</head>
+
+
+<body>
+
+
+   <div class="header">
+
+    <span class="back-arrow" onclick="window.history.back()">←</span>
+
+    <span style="display:flex; align-items:center; gap:8px;">
+        <img src="{{ url_for('static', filename='logo.png') }}" 
+             style="height:30px; width:30px; border-radius:50%;">
+        SecureIQ
+    </span>
+
+</div>
+
+
+
+    <div class="container">
+
+        <div class="sidebar">
+
+            {% if session.get('user') %}
+
+               <a href="{{ url_for('dashboard') }}"
+                class="{% if request.endpoint == 'dashboard' %}active{% endif %}">
+                Dashboard
+                </a>
+
+
+                <a href="{{ url_for('password_strength') }}"
+                class="{% if request.endpoint == 'password_strength' %}active{% endif %}">
+                Password Strength
+                </a>
+
+
+                <a href="{{ url_for('awareness') }}"
+                class="{% if request.endpoint == 'awareness' %}active{% endif %}">
+                Awareness Contents
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        window.addEventListener("load",function(){
+
+            const pop=document.getElementById("popup");
+
+            if(pop){
+                pop.style.display="block";
+
+               setTimeout(()=>{
+                pop.style.display="none";
+                },3000);
+
+            }
+
+        });
+
+    </script>
+
+
+    
+</body>
+</html>

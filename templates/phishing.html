@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    body{
+        background:
+        linear-gradient(rgba(255,255,255,0.70), rgba(255,255,255,0.70)),
+        url('/static/bg3.png');
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+    }
+
+    .page-center{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        min-height: calc(100vh - 120px);
+    }
+</style>
+
+<div class="phishing-page">
+
+    <h2>Phishing Link Checker ☑️</h2>
+
+    <form method="POST">
+        <input type="text" name="url" placeholder="Enter website link" required>
+        <br><br>
+        <button type="submit"> Check Link </button>
+    </form>
+
+    {% if result %}
+        <p><strong>{{ result }}</strong></p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
